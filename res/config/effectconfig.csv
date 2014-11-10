@@ -1,0 +1,13 @@
+ID,ConfigName,ArmatureName,AnimationName,Type,ScaleX,ScaleY,C_Remove
+唯一标示,配置文件,骨骼名称,动画名,特效类型,横向缩放,纵向缩放,播放完成后删除
+e_red_light,effect/redLightAnimation.ExportJson,redLightAnimation,deathfinger,1,1,1,1
+e_blue_light,effect/blueLightAnimation.ExportJson,blueLightAnimation,stealmp,1,1,0.5,0
+e_puncture,effect/puncture/e_puncture.ExportJson,e_puncture,puncture,4,1,1,1
+e_stun,effect/eff_stun/eff_stun.ExportJson,eff_stun,stun,5,1,1,0
+e_hoofstomp,effect/hoofstomp_1/hoofstomp_1.ExportJson,hoofstomp_1,hoofstomp_1,4,1,1,1
+e_healingward,effect/ward/ward.ExportJson,ward,idle,5,1,1,0
+e_gush,effect/gush/gush.ExportJson,gush,gush,2,1,1,0
+e_ravage,effect/ravage/ravage.ExportJson,ravage,ravage,4,1,1,1
+e_crystalnova,effect/crystalnova/crystalnova.ExportJson,crystalnova,crystalnova,4,1,1,1
+e_frostbite,effect/frostbite/frostbite.ExportJson,frostbite,frostbite,5,1,1,0
+e_freezingfield,effect/freezingfield/freezingfield.ExportJson,freezingfield,freezingfield,4,5,5,1

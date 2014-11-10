@@ -1,0 +1,7 @@
+ID,Name,Type,Str,Agi,Int,Attack,HP,AtkType,AtkRange,AtkSpeed,Skill_1,Skill_2,Skill_3,Skill_4,Armature,AtkSprite
+唯一标示,显示名称,英雄类型,力量,敏捷,智力,攻击力,血量,攻击类型,攻击距离,攻击间隔,技能一,技能二,技能三,技能四,动画,子弹
+hero_lion,恶魔巫师,int,15,10,20,20,500,2,300,2,s_puncture,s_sheep,s_stealmp,s_deathfinger,Hero,effect/eff_red_atk.png
+hero_CW,半人马酋长,str,20,10,10,30,800,1,80,3.1,s_hoofstomp,s_doubleedge,s_return,s_fortitude,Hero,
+hero_JUGG,剑圣,agi,15,30,10,25,600,1,100,1.5,s_bladefury,s_healingward,s_bladedance,s_omnislash,Hero,
+hero_TH,潮汐猎人,str,20,10,15,30,700,1,90,2.9,s_gush,s_krakenshell,s_anchorsmash,s_ravage,Hero,
+hero_CM,水晶室女,int,10,10,25,20,500,2,400,2.2,s_crystalnova,s_frostbite,s_brillianceaura,s_freezingfield,Hero,effect/eff_blue_atk.png

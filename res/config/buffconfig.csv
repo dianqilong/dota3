@@ -1,0 +1,13 @@
+ID,Name,Type,Trigger,EffSpring,EffWidth,Prop,Value,DurationTime,ExecFunc,Interval
+唯一标示,名称,类型,触发器,影响范围,影响宽度,影响属性,影响数值,持续时间,执行函数,触发间隔
+buff_return,反伤,,4,,,,,,,
+buff_fortitude,刚毅不屈,,1,,,str,30,,add_prop,
+buff_healingward,治疗守卫,,5,800,500,,30,,aoe_add_hp,1
+buff_addcrit,剑舞,,1,,,crit_rate,50,,add_prop,
+buff_stop_2,眩晕2秒,,1,0,0,,,2,stop,
+buff_stop_3,眩晕3秒,,1,0,0,,,3,stop,
+buff_stop_5,眩晕5秒,,1,0,0,,,5,stop,
+buff_jump_2,击飞后眩晕2两秒,,1,0,0,,,2,do_jump,
+buff_jump_3,击飞后眩晕3两秒,,1,0,0,,,3,do_jump,
+buff_sheep,变羊,,1,0,0,,,5,sheep,
+buff_freeze_2,冻结两秒,,1,0,0,,,2,freeze,
