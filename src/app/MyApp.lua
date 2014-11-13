@@ -10,7 +10,19 @@ end
 
 function MyApp:run()
     cc.FileUtils:getInstance():addSearchPath("res/")
-    self:enterScene("StartScene")
+    self:enterFightScene()
+end
+
+function MyApp:enterFightScene()
+    self:enterScene("FightScene", nil, "fade", 0.6)
+end
+
+function MyApp:enterStartScene()
+    self:enterScene("StartScene", nil, "fade", 0.6)
+end
+
+function MyApp:enterPvPScene()
+    self:enterScene("PvPScene", nil, "fade", 0.6)
 end
 
 return MyApp

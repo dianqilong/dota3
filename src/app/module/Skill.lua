@@ -27,7 +27,7 @@ function Skill:CanUseSkill(master, index)
 
 	-- 没有目标
 	local target = Skill:GetSufferer(skillinfo, master, "closest")
-	if not target then
+	if not target or target.type == "building" then
 		return false
 	end
 
@@ -85,9 +85,9 @@ function Skill:EndSkill(master)
 		Effect:removeEffect(skillInfo.Effect, master)
 	end
 
-	if master.skillhandle then
-		scheduler.unscheduleGlobal(master.skillhandle)
-		master.skillhandle = nil
+	if master.schedulers["skillhandle"] then
+		scheduler.unscheduleGlobal(master.schedulers["skillhandle"])
+		master.schedulers["skillhandle"] = nil
 	end
 
 	master.curSkill = nil
@@ -100,7 +100,11 @@ end
 
 -- 获取技能能量消耗
 function Skill:getNeedPower(skillID)
-	return DataManager:getSkillConf(skillID).Power
+	local config = DataManager:getSkillConf(skillID)
+	if not config then
+		return 0
+	end
+	return config.Power
 end
 
 -- 获取敌方阵营活着的单位
@@ -135,7 +139,7 @@ end
 -- 选取受影响敌人
 function Skill:GetSufferer(skillinfo, master, type)
 	local targets = getAnemys(master)
-	if #targets == 0 then
+	if not targets or #targets == 0 then
 		return nil
 	end
 
@@ -158,7 +162,8 @@ function Skill:GetSufferer(skillinfo, master, type)
 		target = {}
 		for i = 1, #targets do
 			if targets[i]:CanBeSelect() and 
-				cc.rectContainsPoint(rect, cc.p(targets[i]:getPosition())) then
+				cc.rectContainsPoint(rect, cc.p(targets[i]:getPosition())) and
+				targets[i].type ~= "building" then
 				target[#target+1] = targets[i]
 			end
 		end
@@ -327,7 +332,7 @@ function Skill:s_stealmp(skillinfo, master)
 		end
 
 		if skillinfo.DurationTime and skillinfo.DurationTime > 0 then
-			master.skillhandle = scheduler.scheduleGlobal(stealPower, 0.1)
+			master.schedulers["skillhandle"] = scheduler.scheduleGlobal(stealPower, 0.1)
 			master.stealPowerTimer = 0
 			stealPower()
 		end
@@ -523,7 +528,7 @@ function Skill:s_bladefury(skillinfo, master)
 		end
 	end
 
-	master.skillhandle = scheduler.scheduleGlobal(DoDamage, 0.5)
+	master.schedulers["skillhandle"] = scheduler.scheduleGlobal(DoDamage, 0.5)
 end
 
 -- 召唤NPC

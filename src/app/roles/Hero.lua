@@ -38,6 +38,10 @@ function Hero:ctor(heroID, side)
     self:initAI()
 end
 
+function Hero:onExit()
+    -- self:ClearData()
+end
+
 -- 初始化英雄属性信息
 function Hero:initProp(heroConf)
     self.id = heroConf.ID
@@ -52,6 +56,7 @@ function Hero:initProp(heroConf)
     self.str = heroConf.Str
     self.agi = heroConf.Agi
     self.int = heroConf.Int
+    self.building = 0
 
     -- 记录增加的属性
     self.addstr = 0
@@ -70,10 +75,7 @@ function Hero:initProp(heroConf)
     -- 暴击率
     self.crit_rate = 0
 
-    math.randomseed(os.time()+self.u_index*100000)
-    local scale = math.random(50)/100 + 1  -- 0.8-1.2 的随机数
-
-    self.atkRange = heroConf.AtkRange*scale
+    self.atkRange = heroConf.AtkRange
     self.atkSpeed = heroConf.AtkSpeed
     self.maxHp = heroConf.HP + self.str*50
     self.hp = self.maxHp
@@ -98,13 +100,18 @@ end
 
 -- 初始化技能信息
 function Hero:initSkill(heroConf)
-    self.skills = {heroConf.Skill_1, heroConf.Skill_2, heroConf.Skill_3, heroConf.Skill_4}
+    self.skills = {}
     self.powers = {0,0,0,0}
-    self.maxPowers = {Skill:getNeedPower(heroConf.Skill_1),
-                        Skill:getNeedPower(heroConf.Skill_2),
-                        Skill:getNeedPower(heroConf.Skill_3),
-                        Skill:getNeedPower(heroConf.Skill_4)}
+    self.maxPowers = {0,0,0,0}
     self.skillsReady = {false,false,false,false}
+
+    local name = "Skill_"
+    for i=1,4 do
+        if heroConf[name..i] then
+            self.skills[i] = heroConf[name..i]
+            self.maxPowers[i] = Skill:getNeedPower(self.skills[i])
+        end
+    end    
 
     -- 使用被动技能
     for i = 1, #self.skills do
@@ -118,11 +125,13 @@ end
 function Hero:initArmature(heroConf)
     local manager = ccs.ArmatureDataManager:getInstance()
     manager:addArmatureFileInfo("armature/" .. heroConf.Armature .. ".ExportJson")
-    self.armature = ccs.Armature:create("Hero")
+    self.armature = ccs.Armature:create(heroConf.Armature)
 
     self:addChild(self.armature)
 
-    self.armature:setScale(0.6)
+    if self.type ~= "building" then
+        self.armature:setScale(0.6)
+    end
 
     if self.side == 1 then
         self:setPosition(cc.p(display.left-self.atkRange, display.cy+40))
@@ -472,6 +481,21 @@ function Hero:EndHold()
     end
 end
 
+function Hero:ClearData()
+    Skill:EndSkill(self)
+
+    -- 删除计时器
+    for key, value in pairs(self.schedulers) do
+        scheduler.unscheduleGlobal(value)
+    end
+
+    -- 删除所有buff
+    Buff:ClearAllBuff(self)
+
+    -- 清空所有帧回调
+    self.customcallbacks["onDamageEvent"] = {}
+end
+
 -------------------------------------------- 内部调用 -------------------------------------------------
 
 function Hero:idle()
@@ -572,7 +596,7 @@ function Hero:doAttack()
             farAttack(self, target)
         end
 
-        self.atktime = self.atkSpeed
+        self:ResetAtkTime()
     end
 
     self:AddCallBack("onDamageEvent", normalattack)
@@ -605,13 +629,8 @@ function Hero:dead()
         self.moveAction = nil
     end
 
-    -- 删除计时器
-    for key, value in pairs(self.schedulers) do
-        scheduler.unscheduleGlobal(value)
-    end
-
-    -- 删除所有buff
-    Buff:ClearAllBuff(self)
+    -- 清理数据
+    self:ClearData()
 
     -- 删除对象
     for i = 1, #self.container do
@@ -632,6 +651,9 @@ function Hero:dead()
     end
 
     self.armature:getAnimation():play("death")
+
+    -- 检查战斗是否结束
+    display.getRunningScene():CheckFightOver()
 end
 
 function Hero:doEvent(event, ...)

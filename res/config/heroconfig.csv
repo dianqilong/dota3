@@ -1,7 +1,8 @@
 ID,Name,Type,Str,Agi,Int,Attack,HP,AtkType,AtkRange,AtkSpeed,Skill_1,Skill_2,Skill_3,Skill_4,Armature,AtkSprite
-Î¨Ò»±êÊ¾,ÏÔÊ¾Ãû³Æ,Ó¢ĞÛÀàĞÍ,Á¦Á¿,Ãô½İ,ÖÇÁ¦,¹¥»÷Á¦,ÑªÁ¿,¹¥»÷ÀàĞÍ,¹¥»÷¾àÀë,¹¥»÷¼ä¸ô,¼¼ÄÜÒ»,¼¼ÄÜ¶ş,¼¼ÄÜÈı,¼¼ÄÜËÄ,¶¯»­,×Óµ¯
-hero_lion,¶ñÄ§Î×Ê¦,int,15,10,20,20,500,2,300,2,s_puncture,s_sheep,s_stealmp,s_deathfinger,Hero,effect/eff_red_atk.png
-hero_CW,°ëÈËÂíÇõ³¤,str,20,10,10,30,800,1,80,3.1,s_hoofstomp,s_doubleedge,s_return,s_fortitude,Hero,
-hero_JUGG,½£Ê¥,agi,15,30,10,25,600,1,100,1.5,s_bladefury,s_healingward,s_bladedance,s_omnislash,Hero,
-hero_TH,³±Ï«ÁÔÈË,str,20,10,15,30,700,1,90,2.9,s_gush,s_krakenshell,s_anchorsmash,s_ravage,Hero,
-hero_CM,Ë®¾§ÊÒÅ®,int,10,10,25,20,500,2,400,2.2,s_crystalnova,s_frostbite,s_brillianceaura,s_freezingfield,Hero,effect/eff_blue_atk.png
+å”¯ä¸€æ ‡ç¤º,æ˜¾ç¤ºåç§°,è‹±é›„ç±»å‹,åŠ›é‡,æ•æ·,æ™ºåŠ›,æ”»å‡»åŠ›,è¡€é‡,æ”»å‡»ç±»å‹,æ”»å‡»è·ç¦»,æ”»å‡»é—´éš”,æŠ€èƒ½ä¸€,æŠ€èƒ½äºŒ,æŠ€èƒ½ä¸‰,æŠ€èƒ½å››,åŠ¨ç”»,å­å¼¹
+hero_lion,æ¶é­”å·«å¸ˆ,int,15,10,20,20,500,2,300,2,s_puncture,s_sheep,s_stealmp,s_deathfinger,Hero,effect/eff_red_atk.png
+hero_CW,åŠäººé©¬é…‹é•¿,str,20,10,10,30,800,1,80,3.1,s_hoofstomp,s_doubleedge,s_return,s_fortitude,Hero,
+hero_JUGG,å‰‘åœ£,agi,15,30,10,25,600,1,100,1.5,s_bladefury,s_healingward,s_bladedance,s_omnislash,Hero,
+hero_TH,æ½®æ±çŒäºº,str,20,10,15,30,700,1,90,2.9,s_gush,s_krakenshell,s_anchorsmash,s_ravage,Hero,
+hero_CM,æ°´æ™¶å®¤å¥³,int,10,10,25,20,500,2,400,2.2,s_crystalnova,s_frostbite,s_brillianceaura,s_freezingfield,Hero,effect/eff_blue_atk.png
+tower,é˜²å¾¡å¡”,building,0,0,0,300,2000,2,500,3,,,,,tower,effect/eff_blue_atk.png

@@ -40,7 +40,7 @@ function AI:CatchEvent(eventName)
 					master:DoAttack()
 				end
 			end
-		else
+		elseif master.type ~= "building" then
 			master:WalkTo(cc.p(target:getPositionX(), master:getPositionY()))
 		end
 	elseif state == "walk" then

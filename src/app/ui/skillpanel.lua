@@ -16,7 +16,7 @@ local SkillPanel = class("SkillPanel", function(scene)
         local node = cc.uiloader:load("ui/SkillPanelUI/SkillPanelUI_1.json")
         node.hero = hero
         scene:addChild(node)
-
+        
         node.btns = {}
         -- 初始化技能图标
         for i = 1, 4 do
