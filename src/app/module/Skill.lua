@@ -25,6 +25,11 @@ function Skill:CanUseSkill(master, index)
 		return false
 	end
 
+	-- 技能乜有准备好
+	if not master.skillsReady[i] then
+		return false
+	end
+
 	-- 没有目标
 	local target = Skill:GetSufferer(skillinfo, master, "closest")
 	if not target or target.type == "building" then

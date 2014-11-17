@@ -38,8 +38,7 @@ function Hero:ctor(heroID, side)
     self:initAI()
 end
 
-function Hero:onExit()
-    -- self:ClearData()
+function Hero:onExit()    
 end
 
 -- 初始化英雄属性信息
@@ -126,12 +125,8 @@ function Hero:initArmature(heroConf)
     local manager = ccs.ArmatureDataManager:getInstance()
     manager:addArmatureFileInfo("armature/" .. heroConf.Armature .. ".ExportJson")
     self.armature = ccs.Armature:create(heroConf.Armature)
-
+    self.armature:setScale(heroConf.Scale)
     self:addChild(self.armature)
-
-    if self.type ~= "building" then
-        self.armature:setScale(0.6)
-    end
 
     if self.side == 1 then
         self:setPosition(cc.p(display.left-self.atkRange, display.cy+40))
@@ -186,7 +181,7 @@ function Hero:initHPBar()
     size.height = size.height * math.abs(self.armature:getScaleY())
     self:addChild(self.progress)
 
-    self.progress:setPosition(0, size.height+20)
+    self.progress:setPosition(0, size.height)
     self.progress:setScale(0.8)
     self.progress:setVisible(false)
 end
@@ -494,6 +489,14 @@ function Hero:ClearData()
 
     -- 清空所有帧回调
     self.customcallbacks["onDamageEvent"] = {}
+
+    -- 退出时记录塔剩余血量
+    if self.BuildingHP then
+        for k, v in pairs(self.BuildingHP) do
+            self.tower.BuildingHP[k] = self.hp
+        end
+        cclog(self.BuildingHP)
+    end
 end
 
 -------------------------------------------- 内部调用 -------------------------------------------------
@@ -631,6 +634,16 @@ function Hero:dead()
 
     -- 清理数据
     self:ClearData()
+    
+    -- 建筑死亡，记录血量为0
+    if self.tower then
+        for k, v in pairs(self.BuildingHP) do
+            self.tower.BuildingHP[k] = 0
+            if k == "tower" or k == "barracks" or k == "office" then
+                DataManager.PvPManager:destroyTower(self.tower)
+            end
+        end
+    end
 
     -- 删除对象
     for i = 1, #self.container do

@@ -11,3 +11,4 @@ e_ravage,effect/ravage/ravage.ExportJson,ravage,ravage,4,1,1,1
 e_crystalnova,effect/crystalnova/crystalnova.ExportJson,crystalnova,crystalnova,4,1,1,1
 e_frostbite,effect/frostbite/frostbite.ExportJson,frostbite,frostbite,5,1,1,0
 e_freezingfield,effect/freezingfield/freezingfield.ExportJson,freezingfield,freezingfield,4,5,5,1
+e_boss_eff,effect/boss_eff/boss_eff.ExportJson,boss_eff,boss_eff,5,1,0.3,0

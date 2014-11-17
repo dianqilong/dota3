@@ -8,5 +8,4 @@ end
 
 package.path = package.path .. ";src/"
 cc.FileUtils:getInstance():setPopupNotify(false)
-DataManager = {}
 require("app.MyApp").new():run()

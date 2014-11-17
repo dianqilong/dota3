@@ -23,7 +23,7 @@ local SkillPanel = class("SkillPanel", function(scene)
             node.btns[i] = cc.uiloader:seekNodeByTag(node, i)
             node.btns[i]:setColor(cc.c3b(100, 100, 100))
             node.btns[i]:onButtonClicked(function(event)
-                if hero.skillsReady[i] then
+                if Skill:CanUseSkill(hero, i) then
                     Skill:UseSkill(hero, i)
                 end
                 end)

@@ -225,6 +225,8 @@ function Effect:BuffEffect(effectInfo, master, target)
     
     effect:setPosition(0, size.height)
     effect:getAnimation():play(effectInfo.AnimationName)
+    effect:setScaleX(effectInfo.ScaleX)
+    effect:setScaleY(effectInfo.ScaleY)
 	-- 记录特效到特效列表
 	DataManager.effect.effectList[target:getIndex() .. effectInfo.ID] = effect
 
@@ -261,6 +263,13 @@ function Effect:HeadFlyText(master, content, font, is_crit)
 	end
 
 	label:runAction(action)
+end
+
+-- 添加boss脚底特效
+function Effect:AddBossEff(target)
+	local effect = Effect:createEffect("e_boss_eff", target, target)
+	effect:setPosition(cc.p(0, 5))
+	effect:zorder(target:getLocalZOrder()-1)
 end
 
 return Effect

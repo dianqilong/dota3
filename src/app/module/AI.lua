@@ -34,7 +34,8 @@ function AI:CatchEvent(eventName)
 			end
 
 			if master:CheckAtkCD() then
-				if index and Skill:CanUseSkill(master, index) then
+				if index and Skill:CanUseSkill(master, index) and 
+					target.type ~= "building" then
 					Skill:UseSkill(master, index)
 				else
 					master:DoAttack()
