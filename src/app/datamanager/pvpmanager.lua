@@ -10,6 +10,8 @@ function PvPManager:ctor()
 	self.first = true
 	self.towers = {[1]={["o"] = nil, ["t"] = {},["m"] = {},["b"] = {}},
 				   [2]={["o"] = nil, ["t"] = {},["m"] = {},["b"] = {}}}
+
+	self.playerlist = {}			   
 end
 
 function PvPManager:setPlayerSide(side)
